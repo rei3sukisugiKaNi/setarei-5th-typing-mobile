@@ -1,101 +1,105 @@
 // main.js
 import { problemList } from './problems.js';
 
-const startButton = document.getElementById("startButton");
-const restartButton = document.getElementById("restartButton");
+let currentIndex = 0;
+let currentProblem = null;
+let currentKana = "";
+let score = 0;
+let miss = 0;
+let timeLeft = 60;
+let timer;
+let bgmPlaying = true;
+
+const bgm = new Audio("./assets/bgm.mp3");
+bgm.loop = true;
+bgm.volume = 0.3; // 🔉 音量を調整（0.0 ～ 1.0）
+
 const titleScreen = document.getElementById("titleScreen");
 const gameScreen = document.getElementById("gameScreen");
-const kanjiText = document.getElementById("kanjiText");
+const startButton = document.getElementById("startButton");
+const restartButton = document.getElementById("restartButton");
 const kanaText = document.getElementById("kanaText");
+const kanjiText = document.getElementById("kanjiText");
 const inputBox = document.getElementById("inputBox");
 const resultDisplay = document.getElementById("result");
 const timerDisplay = document.getElementById("small-timer");
 const muteButton = document.getElementById("muteButton");
 
-let currentIndex = 0;
-let currentProblem = null;
-let score = 0;
-let miss = 0;
-let timeLeft = 60;
-let timer = null;
-let bgm = new Audio("bgm.mp3");
-bgm.loop = true;
-let bgmPlaying = true;
-
 function startGame() {
   titleScreen.style.display = "none";
   gameScreen.style.display = "block";
-  resultDisplay.innerHTML = "";
   restartButton.style.display = "none";
-  inputBox.value = "";
-  inputBox.focus();
+  resultDisplay.textContent = "";
 
+  currentIndex = 0;
   score = 0;
   miss = 0;
-  currentIndex = 0;
   timeLeft = 60;
-  timerDisplay.textContent = timeLeft;
 
   bgm.play();
-  bgm.muted = false;
   bgmPlaying = true;
   updateMuteButton();
+  updateTimer();
 
   nextProblem();
 
   timer = setInterval(() => {
     timeLeft--;
-    timerDisplay.textContent = timeLeft;
+    updateTimer();
     if (timeLeft <= 0) {
-      clearInterval(timer);
       endGame();
     }
   }, 1000);
 }
 
+function updateTimer() {
+  timerDisplay.textContent = `残り${timeLeft}秒`;
+}
+
 function nextProblem() {
-  if (currentIndex === 0) {
-    currentProblem = problemList[0];
-  } else {
-    const rest = problemList.slice(1);
-    currentProblem = rest[Math.floor(Math.random() * rest.length)];
-  }
-  kanjiText.textContent = currentProblem.kanji;
-  kanaText.textContent = currentProblem.kana;
+  const current = problemList[currentIndex % problemList.length];
+  currentProblem = current;
+  currentKana = current.kana;
+  kanjiText.textContent = current.kanji;
+  kanaText.textContent = current.kana;
   inputBox.value = "";
   inputBox.focus();
   currentIndex++;
 }
 
-function handleInput() {
-  const typed = inputBox.value.trim();
-  if (typed === currentProblem.kana) {
-    score += currentProblem.kana.length;
+function handleInput(e) {
+  const typed = e.target.value.trim();
+  if (typed === currentKana) {
+    score += currentKana.length;
     nextProblem();
-  } else if (!currentProblem.kana.startsWith(typed)) {
+  } else if (!currentKana.startsWith(typed)) {
     miss++;
   }
 }
 
 function endGame() {
+  clearInterval(timer);
   kanjiText.textContent = "";
   kanaText.textContent = "";
-  inputBox.blur();
+  inputBox.style.display = "none";
 
+  const speed = (score / 60).toFixed(2);
   let rank = "C";
   if (score >= 270) rank = "S";
   else if (score >= 220) rank = "A";
   else if (score >= 170) rank = "B";
 
-  const speed = (score / 60).toFixed(2);
-
-  resultDisplay.innerHTML = `おつかれさまでした<br>
-    <span class="rank">ランク: ${rank}</span><br>
+  resultDisplay.innerHTML = `おつかれさまでした<br><span class="rank">ランク: ${rank}</span><br>
     正しく打ったキー: ${score}<br>
     ミスタイプ: ${miss}<br>
     平均タイプ数: ${speed} 回/秒`;
 
   restartButton.style.display = "inline-block";
+  inputBox.blur();
+}
+
+function updateMuteButton() {
+  muteButton.textContent = bgmPlaying ? "🔇 BGM: OFF" : "🔊 BGM: ON";
 }
 
 function toggleMute() {
@@ -104,19 +108,15 @@ function toggleMute() {
   updateMuteButton();
 }
 
-function updateMuteButton() {
-  muteButton.textContent = bgmPlaying ? "BGM: OFF" : "BGM: ON";
-}
-
 startButton.addEventListener("click", () => {
-  document.addEventListener("click", () => inputBox.focus());
   startGame();
 });
 
 restartButton.addEventListener("click", () => {
-  document.addEventListener("click", () => inputBox.focus());
+  inputBox.style.display = "inline-block";
   startGame();
 });
 
-inputBox.addEventListener("input", handleInput);
 muteButton.addEventListener("click", toggleMute);
+inputBox.addEventListener("input", handleInput);
+document.addEventListener("click", () => inputBox.focus());
