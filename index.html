@@ -37,7 +37,7 @@
       padding: 8px 16px;
       margin-top: 20px;
       background-color: #ccc;
-      color: white;
+      color: #333;
       border: none;
       border-radius: 10px;
     }
@@ -53,14 +53,16 @@
       margin: 20px auto;
       max-width: 400px;
       color: #fffaf0;
+      margin-top: 0.1px; 
+      margin-bottom: 80px; 
     }
     #kanjiText {
       font-size: 1.6rem;
-      margin: 10px auto 5px;
+      margin: 70px auto 5px;
     }
     #kanaText {
-      font-size: 1.3rem;
-      margin: 5px auto 20px;
+      font-size: 1.0rem;
+      margin: 5px auto 10px;
     }
     input[type="text"] {
       font-size: 1.2rem;
@@ -71,10 +73,10 @@
     }
     #small-timer {
       position: absolute;
-      top: 8px;
+      top: 150px;
       right: 12px;
       font-size: 0.9rem;
-      color: white;
+      color: #333;
       font-family: 'ShineCaption', sans-serif;
     }
     #muteButton {
@@ -115,7 +117,7 @@
 
   <!-- ゲーム画面 -->
   <div id="gameScreen">
-    <div id="small-timer">60</div>
+    <div id="small-timer">残り60秒</div>
     <p id="kanjiText"></p>
     <p id="kanaText"></p>
     <input id="inputBox" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
