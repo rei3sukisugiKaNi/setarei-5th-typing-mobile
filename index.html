@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>setareiASMR 5TH ANNIVERSARY - スマホ版</title>
+  <style>
+    @font-face {
+      font-family: 'ShineCaption';
+      src: url('./assets/fonts/しねきゃぷしょん.ttf') format('truetype');
+    }
+    body {
+      background-color: #fdfcf7; /* 背景色 オフホワイト */
+      font-family: 'ShineCaption', sans-serif; /* フォント設定 */
+      text-align: center; /* 中央揃え */
+      padding: 10px; /* 他要素との間隔 */
+    }
+    h1 {
+      font-size: 1.8rem; /* タイトル文字大きさ */
+      color: #cd7d7f; /* ピン色 */
+    }
+    #startButton {
+      font-size: 1.0rem; /* ボタン文字 */
+      padding: 8px 16px; /* 内部の間隔 */
+      margin-top: 20px; /* 上に間隔 */
+      background-color: #cd7d7f; /* ボタン背景 */
+      color: white; /* 文字色 */
+      border: none; /* 枠無し */
+      border-radius: 10px; /* ボタン角丸め */
+    }
+    #gameScreen {
+      display: none; /* 初期は表示しない */
+      margin-top: 20px; /* 上に間隔 */
+      background-image: url('haikei.jpeg');
+      background-repeat: no-repeat;
+      background-size: contain; /* 元画像の縦横比を保って全体を表示 */
+      background-position: center top;
+    }
+    #kanaText, #inputArea {
+      font-size: 1.5rem; /* 文字大きさ */
+      margin: 10px auto; /* 上下10px、中央 */
+    }
+    input[type="text"] {
+      font-size: 1.2rem; /* 入力文字大きさ */
+      padding: 8px;
+      width: 80%; /* 入力ボックス幅 */
+      border: 1px solid #ccc; /* 枠 */
+      border-radius: 8px; /* 角丸め */
+    }
+    #small-timer {
+      position: absolute;        /* 画面の右上にくっつけるため */
+      top: 10px;                 /* 上からの距離 */
+      right: 10px;               /* 右からの距離 */
+      font-size: 0.8rem;         /* 文字サイズ小さめ */
+      color: white;              /* 文字の色 */
+      font-family: 'ShineCaption', sans-serif;
+    }
+    #result-screen {
+      display: block;
+      background-image: url('haikei.jpeg');
+      background-size: cover;
+    }
+    #result {
+      font-family: 'ShineCaption', sans-serif;
+      color: white;
+      font-size: 20px;
+      margin-top: 30px;
+      line-height: 1.6;
+    }
+    #result .rank {
+      font-size: 36px;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- タイトル画面 -->
+  <div id="titleScreen">
+    <h1>setareiASMR 5TH ANNIVERSARY</h1>
+    <p>2025/6/28 世田れい活動5周年のお祝いゲームです。</p>
+    <p>世田れいさんに関連するお題がランダムで表示されます。</p>
+    <p style="color: red;">センシティブ注意</p> 
+    <p style="color: #888;">※ すべてひらがなで入力してください</p>
+    <button id="startButton">🧸START</button>
+    <br><br>
+    <p style="color: #888;">※ このゲームは世田れいさんとファンの方に<br>　　　遊んでいただくことを前提に制作しています。</p>
+  </div>
+
+  <!-- ゲーム画面 -->
+  <div id="gameScreen">
+  <p id="kanjiText"></p> <!-- ← 漢字 -->
+  <p id="kanaText"></p>  <!-- ← かな -->
+  <input id="inputBox" type="text">
+  <p id="judgeText"></p> <!-- 判定表示用（今は使用なし） -->
+  </div>
+  <div id="small-timer">60</div>
+
+  <script>
+    const startButton = document.getElementById("startButton");
+    const titleScreen = document.getElementById("titleScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    const kanaText = document.getElementById("kanaText");
+    const inputBox = document.getElementById("inputBox");
+    const judgeText = document.getElementById("judgeText");
+
+    const problems = [
+      { kanji: "れいさん大好き", kana: "れいさんだいすき" },
+      { kanji: "やったー", kana: "やったー" },
+      { kanji: "欲求不満", kana: "よっきゅうふまん" },
+    ];
+
+    let currentIndex = 0;
+
+    startButton.addEventListener("click", () => {
+      titleScreen.style.display = "none";
+      gameScreen.style.display = "block";
+      showProblem();
+    });
+
+    function showProblem() {
+      const current = problems[currentIndex];
+      kanaText.innerHTML = `<strong>${current.kanji}</strong>`;
+      inputBox.value = "";
+      judgeText.textContent = "";
+      inputBox.focus();
+    }
+
+    inputBox.addEventListener("input", () => {
+      const typed = inputBox.value.trim();
+      const answer = problems[currentIndex].kana;
+      if (typed === answer) {
+        judgeText.textContent = "正解ー!";
+        judgeText.style.color = "green";
+        currentIndex = (currentIndex + 1) % problems.length;
+        setTimeout(showProblem, 1000);
+      } else {
+        judgeText.textContent = "";
+      }
+    });
+  </script>
+</body>
+</html>
