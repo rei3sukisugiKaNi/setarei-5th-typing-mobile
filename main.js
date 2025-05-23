@@ -18,7 +18,7 @@ let score = 0;
 let miss = 0;
 let timeLeft = 60;
 let timer = null;
-let bgm = new Audio("./assets/bgm.mp3");
+let bgm = new Audio("bgm.mp3");
 bgm.loop = true;
 let bgmPlaying = true;
 
