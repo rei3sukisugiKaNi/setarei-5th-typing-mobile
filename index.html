@@ -17,7 +17,7 @@
       padding: 0;
     }
     #titleScreen {
-      padding: 20px;
+      padding: 1.0px;
     }
     h1 {
       font-size: 1.8rem;
@@ -26,7 +26,7 @@
     #startButton {
       font-size: 1.0rem;
       padding: 8px 16px;
-      margin-top: 20px;
+      margin-top: 0.5px;
       background-color: #cd7d7f;
       color: white;
       border: none;
@@ -58,36 +58,39 @@
     }
     #kanjiText {
       font-size: 1.6rem;
-      margin: 70px auto 5px;
+      margin: 50px auto 5px;
     }
     #kanaText {
-      font-size: 1.0rem;
-      margin: 5px auto 10px;
+      font-size: 0.9rem;
+      margin: 10px auto 20px;
     }
     input[type="text"] {
       font-size: 1.2rem;
       padding: 10px;
-      width: 90%;
+      width: 80%;
       border: none; /* ← ここで枠を削除 */
       border-radius: 8px;
       background-color: #fffaf0; /* 塗りつぶしと同じ色 */
     }
     #small-timer {
       position: absolute;
-      top: 100px;
+      top: 60px;
       left: 12px;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: white;
       font-family: 'ShineCaption', sans-serif;
     }
     #muteButton {
-      font-size: 0.8rem;
-      padding: 6px 10px;
-      margin-top: 10px;
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      font-size: 0.5rem;
+      padding: 2px 4px;
+      margin-top: 5px;
       background-color: #ccc;
       color: #333;
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
     }
     #result {
       font-family: 'ShineCaption', sans-serif;
@@ -106,26 +109,25 @@
 <body>
   <!-- タイトル画面 -->
   <div id="titleScreen">
-    <img src="banner.jpg" alt="Banner" style="max-width: 90%; height: auto;" />
-    <h1>setareiASMR 5TH ANNIVERSARY</h1>
-    <p>2025/6/28 世田れい活動5周年のお祝いゲームです。</p>
-    <p>世田れいさんに関連するお題がランダムで表示されます。</p>
+    <img src="banner.jpg" alt="Banner" style="max-width: 100%; height: auto;" />
+    <h1>setareiASMR<br><br>5TH ANNIVERSARY</h1>
+    <p>世田れい活動5周年のお祝いに<br>フリック入力ゲームを制作しました。</p>
     <p style="color: red;">センシティブ注意</p>
-    <p style="color: #888;">※ すべてひらがなで入力してください</p>
+    <p style="color: #888;">お題はランダムで表示されます。</p>
+    <p style="color: #888;">※すべてひらがなで入力してください。</p>
     <button id="startButton">🧸START</button>
-    <p style="color: #888; font-size: 0.8rem; margin-top: 1rem;">※ このゲームは世田れいさんとファンの方に<br>遊んでいただくことを前提に制作しています。</p>
+    <p style="color: #888; font-size: 0.8rem; margin-top: 1rem;">※本ゲームは世田れいさんとれいさんファンの方に<br><space>遊んでいただくことを前提に制作しています。</p>
   </div>
 
   <!-- ゲーム画面 -->
   <div id="gameScreen">
-    <div id="small-timer">残り60秒</div>
+    <button id="muteButton">BGM: ON</button>
     <p id="kanjiText"></p>
     <p id="kanaText"></p>
     <input id="inputBox" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    <div id="small-timer">残り60秒</div>
     <div id="result"></div>
-    <button id="restartButton" style="display:none;">もう一回する</button>
-    <br><br>
-    <button id="muteButton">BGM: ON</button>
+    <button id="restartButton" style="display:none;">🧸Replay</button>
   </div>
 
   <script type="module" src="./main.js"></script>
