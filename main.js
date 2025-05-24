@@ -68,7 +68,7 @@ function nextProblem() {
 }
 
 function handleInput(e) {
-  const typed = e.target.value.trim();
+  const typed = e.target.value.normalize("NFC").trim(); // ←★ここで normalize("NFC") を追加！
   if (typed === currentKana) {
     score += currentKana.length;
     nextProblem();
