@@ -50,7 +50,7 @@ function startGame() {
   currentKana = "";
   currentProblem = null;
 
-  const rest = problemList.slice(1); // 2問目以降
+  const rest = problemList.slice(1);
   shuffledProblems = shuffleArray(rest);
 
   bgm.play();
@@ -59,9 +59,6 @@ function startGame() {
 
   nextProblem();
   updateTimer();
-  inputBox.value = "";
-  inputBox.focus();
-
   clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
@@ -79,20 +76,27 @@ function updateTimer() {
 
 function nextProblem() {
   if (currentIndex === 0) {
-    currentProblem = problemList[0];
+    currentProblem = problemList[0]; // 最初の問題は固定
   } else {
-    if (currentIndex - 1 >= shuffledProblems.length) {
+    const nextIndex = currentIndex - 1;
+    if (nextIndex >= shuffledProblems.length) {
       endGame();
       return;
     }
-    currentProblem = shuffledProblems[currentIndex - 1];
+    currentProblem = shuffledProblems[nextIndex];
   }
 
   currentKana = currentProblem.kana;
   kanjiText.textContent = currentProblem.kanji;
   kanaText.textContent = currentProblem.kana;
   inputBox.value = "";
-  inputBox.focus();
+
+  // 🔧未確定文字対策：IME解除→再フォーカス
+  inputBox.blur();
+  setTimeout(() => {
+    inputBox.focus();
+  }, 10);
+
   currentIndex++;
 }
 
@@ -100,7 +104,6 @@ function handleInput(e) {
   const typed = e.target.value.normalize("NFC").trim();
   if (typed === currentKana) {
     score += currentKana.length;
-    inputBox.value = "";
     nextProblem();
   } else if (!currentKana.startsWith(typed)) {
     miss++;
