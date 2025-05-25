@@ -76,7 +76,7 @@ function updateTimer() {
 
 function nextProblem() {
   if (currentIndex === 0) {
-    currentProblem = problemList[0]; // 最初の問題は固定
+    currentProblem = problemList[0]; // 1問目は固定
   } else {
     const nextIndex = currentIndex - 1;
     if (nextIndex >= shuffledProblems.length) {
@@ -89,13 +89,14 @@ function nextProblem() {
   currentKana = currentProblem.kana;
   kanjiText.textContent = currentProblem.kanji;
   kanaText.textContent = currentProblem.kana;
-  inputBox.value = "";
 
-  // 🔧未確定文字対策：IME解除→再フォーカス
+  // --- IME未確定文字対策：一度 blur → 再度 focus ---
+  inputBox.value = " ";
   inputBox.blur();
   setTimeout(() => {
+    inputBox.value = "";
     inputBox.focus();
-  }, 10);
+  }, 30);
 
   currentIndex++;
 }
