@@ -9,10 +9,11 @@ let miss = 0;
 let timeLeft = 60;
 let timer;
 let bgmPlaying = true;
-
 const bgm = new Audio("./bgm.mp3");
 bgm.loop = true;
 bgm.volume = 0.3; // 🔉 音量を調整（0.0 ～ 1.0）
+
+let shuffledProblems = []; // 問題リストのシャッフル用（グローバル）
 
 const titleScreen = document.getElementById("titleScreen");
 const gameScreen = document.getElementById("gameScreen");
@@ -36,6 +37,9 @@ function startGame() {
   miss = 0;
   timeLeft = 60;
 
+  const rest = problemList.slice(1); // 1問目を除く
+  shuffledProblems = shuffleArray(rest);
+  
   bgm.play();
   bgmPlaying = true;
   updateMuteButton();
@@ -71,6 +75,7 @@ function handleInput(e) {
   const typed = e.target.value.normalize("NFC").trim(); // ←★ここで normalize("NFC") を追加！
   if (typed === currentKana) {
     score += currentKana.length;
+    inputBox.value = ""; // ←★ ここで即リセット
     nextProblem();
   } else if (!currentKana.startsWith(typed)) {
     miss++;
