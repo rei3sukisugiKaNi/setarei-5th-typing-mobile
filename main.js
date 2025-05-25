@@ -10,9 +10,9 @@ let timeLeft = 60;
 let timer;
 let bgmPlaying = true;
 
-const bgm = new Audio("./assets/bgm.mp3");
+const bgm = new Audio("./bgm.mp3");
 bgm.loop = true;
-bgm.volume = 0.8; // 🔉 音量を調整（0.0 ～ 1.0）
+bgm.volume = 0.7; // 🔉 音量を調整（0.0 ～ 1.0）
 
 const titleScreen = document.getElementById("titleScreen");
 const gameScreen = document.getElementById("gameScreen");
