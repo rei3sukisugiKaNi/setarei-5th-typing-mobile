@@ -1,3 +1,5 @@
+// main.js
+
 import { problemList } from './problems.js';
 
 let currentIndex = 0;
@@ -60,6 +62,7 @@ function startGame() {
   inputBox.value = "";
   inputBox.focus();
 
+  clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
     updateTimer();
@@ -77,11 +80,12 @@ function updateTimer() {
 function nextProblem() {
   if (currentIndex === 0) {
     currentProblem = problemList[0];
-  } else if (currentIndex <= shuffledProblems.length) {
-    currentProblem = shuffledProblems[currentIndex - 1];
   } else {
-    endGame();
-    return;
+    if (currentIndex - 1 >= shuffledProblems.length) {
+      endGame();
+      return;
+    }
+    currentProblem = shuffledProblems[currentIndex - 1];
   }
 
   currentKana = currentProblem.kana;
@@ -94,10 +98,9 @@ function nextProblem() {
 
 function handleInput(e) {
   const typed = e.target.value.normalize("NFC").trim();
-
   if (typed === currentKana) {
     score += currentKana.length;
-    inputBox.value = ""; // ← 入力を即リセット
+    inputBox.value = "";
     nextProblem();
   } else if (!currentKana.startsWith(typed)) {
     miss++;
