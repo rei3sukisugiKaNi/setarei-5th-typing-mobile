@@ -50,7 +50,7 @@ function startGame() {
   currentKana = "";
   currentProblem = null;
 
-  const rest = problemList.slice(1);
+  const rest = problemList.slice(1); // 2問目以降
   shuffledProblems = shuffleArray(rest);
 
   bgm.play();
@@ -59,6 +59,7 @@ function startGame() {
 
   nextProblem();
   updateTimer();
+
   clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
@@ -76,7 +77,7 @@ function updateTimer() {
 
 function nextProblem() {
   if (currentIndex === 0) {
-    currentProblem = problemList[0]; // 1問目は固定
+    currentProblem = problemList[0];
   } else {
     const nextIndex = currentIndex - 1;
     if (nextIndex >= shuffledProblems.length) {
@@ -90,11 +91,10 @@ function nextProblem() {
   kanjiText.textContent = currentProblem.kanji;
   kanaText.textContent = currentProblem.kana;
 
-  // --- IME未確定文字対策：一度 blur → 再度 focus ---
-  inputBox.value = " ";
-  inputBox.blur();
+  inputBox.style.display = "none";
   setTimeout(() => {
     inputBox.value = "";
+    inputBox.style.display = "inline-block";
     inputBox.focus();
   }, 30);
 
