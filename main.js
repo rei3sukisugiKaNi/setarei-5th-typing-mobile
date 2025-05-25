@@ -5,6 +5,7 @@ import { problemList } from './problems.js';
 let currentIndex = 0;
 let currentProblem = null;
 let currentKana = "";
+let inputIndex = 0;
 let score = 0;
 let miss = 0;
 let timeLeft = 60;
@@ -47,10 +48,11 @@ function startGame() {
   miss = 0;
   timeLeft = 60;
   currentIndex = 0;
+  inputIndex = 0;
   currentKana = "";
   currentProblem = null;
 
-  const rest = problemList.slice(1); // 2問目以降
+  const rest = problemList.slice(1);
   shuffledProblems = shuffleArray(rest);
 
   bgm.play();
@@ -59,6 +61,8 @@ function startGame() {
 
   nextProblem();
   updateTimer();
+  inputBox.value = "";
+  inputBox.focus();
 
   clearInterval(timer);
   timer = setInterval(() => {
@@ -79,36 +83,47 @@ function nextProblem() {
   if (currentIndex === 0) {
     currentProblem = problemList[0];
   } else {
-    const nextIndex = currentIndex - 1;
-    if (nextIndex >= shuffledProblems.length) {
+    if (currentIndex - 1 >= shuffledProblems.length) {
       endGame();
       return;
     }
-    currentProblem = shuffledProblems[nextIndex];
+    currentProblem = shuffledProblems[currentIndex - 1];
   }
 
   currentKana = currentProblem.kana;
+  inputIndex = 0;
   kanjiText.textContent = currentProblem.kanji;
-  kanaText.textContent = currentProblem.kana;
-
-  inputBox.style.display = "none";
-  setTimeout(() => {
-    inputBox.value = "";
-    inputBox.style.display = "inline-block";
-    inputBox.focus();
-  }, 30);
-
+  kanaText.innerHTML = highlightKana(currentKana, inputIndex);
+  inputBox.value = "";
+  inputBox.focus();
   currentIndex++;
+}
+
+function highlightKana(kana, index) {
+  return kana
+    .split('')
+    .map((char, i) => i < index ? `<span style="color: gray;">${char}</span>` : char)
+    .join('');
 }
 
 function handleInput(e) {
   const typed = e.target.value.normalize("NFC").trim();
-  if (typed === currentKana) {
-    score += currentKana.length;
-    nextProblem();
-  } else if (!currentKana.startsWith(typed)) {
+  const expected = currentKana[inputIndex];
+  const typedChar = typed.slice(-1); // 最後に入力された1文字だけ判定
+
+  if (typedChar === expected) {
+    score++;
+    inputIndex++;
+    kanaText.innerHTML = highlightKana(currentKana, inputIndex);
+    if (inputIndex >= currentKana.length) {
+      nextProblem();
+    }
+  } else if (typed.length > 0) {
     miss++;
   }
+
+  // 入力欄は常に空にして1文字ずつ打ち直させる
+  inputBox.value = "";
 }
 
 function endGame() {
