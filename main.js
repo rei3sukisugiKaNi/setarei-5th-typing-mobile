@@ -71,6 +71,7 @@ function handleInput(e) {
   const typed = e.target.value.normalize("NFC").trim(); // ←★ここで normalize("NFC") を追加！
   if (typed === currentKana) {
     score += currentKana.length;
+    inputBox.value = ""; // ←★ ここで即リセット
     nextProblem();
   } else if (!currentKana.startsWith(typed)) {
     miss++;
