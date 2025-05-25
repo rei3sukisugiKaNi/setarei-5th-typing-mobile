@@ -1,4 +1,4 @@
-// main.js
+// main.js　PC風判定
 
 import { problemList } from './problems.js';
 
@@ -21,7 +21,6 @@ const gameScreen = document.getElementById("gameScreen");
 const titleScreen = document.getElementById("titleScreen");
 const kanaText = document.getElementById("kanaText");
 const kanjiText = document.getElementById("kanjiText");
-const inputBox = document.getElementById("inputBox");
 const timerDisplay = document.getElementById("small-timer");
 const resultDisplay = document.getElementById("result");
 const muteButton = document.getElementById("muteButton");
@@ -42,7 +41,6 @@ function startGame() {
   gameScreen.style.display = "block";
   resultDisplay.innerHTML = "";
   restartButton.style.display = "none";
-  inputBox.style.display = "inline-block";
 
   score = 0;
   miss = 0;
@@ -61,8 +59,6 @@ function startGame() {
 
   nextProblem();
   updateTimer();
-  inputBox.value = "";
-  inputBox.focus();
 
   clearInterval(timer);
   timer = setInterval(() => {
@@ -127,7 +123,6 @@ function handleInput(e) {
 }
 
 function endGame() {
-  inputBox.style.display = "none";
   kanjiText.textContent = "";
   kanaText.textContent = "";
 
