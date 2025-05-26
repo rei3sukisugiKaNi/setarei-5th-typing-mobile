@@ -1,4 +1,4 @@
-// main.js(PC風判定)完成版 + シークバー表示調整
+// main.js(PC風判定)完成版 + シークバー対応
 
 import { problemList } from './problems.js';
 
@@ -28,31 +28,13 @@ const muteButton = document.getElementById("muteButton");
 
 let shuffledProblems = [];
 
-// ✅ シークバー用要素を生成（初期は非表示）
+// ✅ シークバー用要素を生成
 const progressContainer = document.createElement("div");
 progressContainer.id = "progress-container";
-progressContainer.style.cssText = `
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
-  width: 90%;
-  height: 6px;
-  background-color: #eee;
-  border-radius: 3px;
-  overflow: hidden;
-  display: none;
-  z-index: 1;
-`;
 const progressBar = document.createElement("div");
 progressBar.id = "progress-bar";
-progressBar.style.cssText = `
-  width: 0%;
-  height: 100%;
-  background-color: red;
-  transition: width 1s linear;
-`;
 progressContainer.appendChild(progressBar);
-document.getElementById("gameScreen").appendChild(progressContainer);
+document.body.appendChild(progressContainer);
 
 function shuffleArray(array) {
   const copied = [...array];
@@ -69,7 +51,6 @@ function startGame() {
   resultDisplay.innerHTML = "";
   restartButton.style.display = "none";
   inputBox.style.display = "inline-block";
-  progressContainer.style.display = "block"; // ✅ 表示開始
 
   score = 0;
   miss = 0;
@@ -91,7 +72,7 @@ function startGame() {
   inputBox.value = "";
   inputBox.focus();
 
-  progressBar.style.width = "0%"; // ✅ 初期化
+  progressBar.style.width = "0%"; // ✅ シークバー初期化
   let elapsed = 0;
   clearInterval(timer);
   timer = setInterval(() => {
@@ -152,6 +133,7 @@ function handleInput(e) {
   } else if (typed.length > 0) {
     miss++;
   }
+
   inputBox.value = "";
 }
 
@@ -159,7 +141,7 @@ function endGame() {
   inputBox.style.display = "none";
   kanjiText.textContent = "";
   kanaText.textContent = "";
-  progressBar.style.width = "100%"; // ✅ 最後まで伸ばす
+  progressBar.style.width = "100%"; // ✅ 満了状態に
 
   const speed = (score / 60).toFixed(2);
   let rank = "C";
