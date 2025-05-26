@@ -11,7 +11,7 @@ let miss = 0;
 let timeLeft = 60;
 let timer;
 let bgmPlaying = true;
-let bgm = new Audio("./assets/bgm.mp3");
+let bgm = new Audio("./bgm.mp3");
 bgm.loop = true;
 bgm.volume = 0.3;
 
