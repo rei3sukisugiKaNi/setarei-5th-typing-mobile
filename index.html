@@ -118,21 +118,23 @@
 
     /* ✅ シークバー追加部分 */
     #progress-container {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 5px;
+      height: 4px;
       background-color: #eee;
-      z-index: 9999;
+      border-radius: 2px;
+      overflow: hidden;
+      z-index: 10;
     }
 
-    #progress-bar {
-      height: 100%;
-      background-color: #cd7d7f;
-      width: 0%;
-      transition: width 1s linear;
-    }
+  #progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: red;
+    transition: width 1s linear;
+  }
   </style>
 </head>
 <body>
@@ -159,7 +161,5 @@
     <button id="restartButton" style="display:none;">🧸Replay</button>
   </div>
 
-  <!-- ✅ シークバー要素（空div。main.jsで内容を追加） -->
-  <script type="module" src="./main.js"></script>
 </body>
 </html>
