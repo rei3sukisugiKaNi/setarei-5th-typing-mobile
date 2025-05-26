@@ -1,4 +1,4 @@
-// main.js(PC風判定+シークバー・レイアウト調整)
+// main.js(PC風判定)完成版 + シークバー対応
 
 import { problemList } from './problems.js';
 
@@ -26,15 +26,15 @@ const timerDisplay = document.getElementById("small-timer");
 const resultDisplay = document.getElementById("result");
 const muteButton = document.getElementById("muteButton");
 
-// シークバー要素
-const progressBar = document.createElement("div");
-progressBar.id = "progress-bar";
+let shuffledProblems = [];
+
+// ✅ シークバー用要素を生成
 const progressContainer = document.createElement("div");
 progressContainer.id = "progress-container";
+const progressBar = document.createElement("div");
+progressBar.id = "progress-bar";
 progressContainer.appendChild(progressBar);
 document.body.appendChild(progressContainer);
-
-let shuffledProblems = [];
 
 function shuffleArray(array) {
   const copied = [...array];
@@ -51,7 +51,6 @@ function startGame() {
   resultDisplay.innerHTML = "";
   restartButton.style.display = "none";
   inputBox.style.display = "inline-block";
-  inputBox.focus();
 
   score = 0;
   miss = 0;
@@ -70,13 +69,17 @@ function startGame() {
 
   nextProblem();
   updateTimer();
-  updateProgressBar();
+  inputBox.value = "";
+  inputBox.focus();
 
+  progressBar.style.width = "0%"; // ✅ シークバー初期化
+  let elapsed = 0;
   clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
+    elapsed++;
     updateTimer();
-    updateProgressBar();
+    progressBar.style.width = `${(elapsed / 60) * 100}%`;
     if (timeLeft <= 0) {
       clearInterval(timer);
       endGame();
@@ -85,12 +88,7 @@ function startGame() {
 }
 
 function updateTimer() {
-  timerDisplay.style.display = "none"; // 非表示
-}
-
-function updateProgressBar() {
-  const progress = (60 - timeLeft) / 60 * 100;
-  progressBar.style.width = `${progress}%`;
+  timerDisplay.textContent = `残り${timeLeft}秒`;
 }
 
 function nextProblem() {
@@ -143,15 +141,13 @@ function endGame() {
   inputBox.style.display = "none";
   kanjiText.textContent = "";
   kanaText.textContent = "";
-
-  updateProgressBar();
-  progressBar.style.width = "100%";
+  progressBar.style.width = "100%"; // ✅ 満了状態に
 
   const speed = (score / 60).toFixed(2);
   let rank = "C";
-  if (score >= 230) rank = "S";
-  else if (score >= 190) rank = "A";
-  else if (score >= 150) rank = "B";
+  if (score >= 270) rank = "S";
+  else if (score >= 220) rank = "A";
+  else if (score >= 170) rank = "B";
 
   resultDisplay.innerHTML = `おつかれさまでした<br><span class="rank">ランク: ${rank}</span><br>
     正しく打ったキー: ${score}<br>
