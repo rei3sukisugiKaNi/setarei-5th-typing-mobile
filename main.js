@@ -1,4 +1,4 @@
-// main.js(PC風判定)完成版
+// main.js(PC風判定+シークバー・レイアウト調整)
 
 import { problemList } from './problems.js';
 
@@ -26,6 +26,14 @@ const timerDisplay = document.getElementById("small-timer");
 const resultDisplay = document.getElementById("result");
 const muteButton = document.getElementById("muteButton");
 
+// シークバー要素
+const progressBar = document.createElement("div");
+progressBar.id = "progress-bar";
+const progressContainer = document.createElement("div");
+progressContainer.id = "progress-container";
+progressContainer.appendChild(progressBar);
+document.body.appendChild(progressContainer);
+
 let shuffledProblems = [];
 
 function shuffleArray(array) {
@@ -43,6 +51,7 @@ function startGame() {
   resultDisplay.innerHTML = "";
   restartButton.style.display = "none";
   inputBox.style.display = "inline-block";
+  inputBox.focus();
 
   score = 0;
   miss = 0;
@@ -61,13 +70,13 @@ function startGame() {
 
   nextProblem();
   updateTimer();
-  inputBox.value = "";
-  inputBox.focus();
+  updateProgressBar();
 
   clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
     updateTimer();
+    updateProgressBar();
     if (timeLeft <= 0) {
       clearInterval(timer);
       endGame();
@@ -76,7 +85,12 @@ function startGame() {
 }
 
 function updateTimer() {
-  timerDisplay.textContent = `残り${timeLeft}秒`;
+  timerDisplay.style.display = "none"; // 非表示
+}
+
+function updateProgressBar() {
+  const progress = (60 - timeLeft) / 60 * 100;
+  progressBar.style.width = `${progress}%`;
 }
 
 function nextProblem() {
@@ -109,7 +123,7 @@ function highlightKana(kana, index) {
 function handleInput(e) {
   const typed = e.target.value.normalize("NFC").trim();
   const expected = currentKana[inputIndex];
-  const typedChar = typed.slice(-1); // 最後に入力された1文字だけ判定
+  const typedChar = typed.slice(-1);
 
   if (typedChar === expected) {
     score++;
@@ -122,7 +136,6 @@ function handleInput(e) {
     miss++;
   }
 
-  // 入力欄は常に空にして1文字ずつ打ち直させる
   inputBox.value = "";
 }
 
@@ -130,6 +143,9 @@ function endGame() {
   inputBox.style.display = "none";
   kanjiText.textContent = "";
   kanaText.textContent = "";
+
+  updateProgressBar();
+  progressBar.style.width = "100%";
 
   const speed = (score / 60).toFixed(2);
   let rank = "C";
