@@ -163,9 +163,9 @@ function endGame() {
 
   const speed = (score / 60).toFixed(2);
   let rank = "C";
-  if (score >= 270) rank = "S";
-  else if (score >= 220) rank = "A";
-  else if (score >= 170) rank = "B";
+  if (score >= 220) rank = "S";
+  else if (score >= 180) rank = "A";
+  else if (score >= 150) rank = "B";
 
   resultDisplay.innerHTML = `おつかれさまでした<br><span class="rank">ランク: ${rank}</span><br>
     正しく打ったキー: ${score}<br>
