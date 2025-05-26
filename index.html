@@ -9,6 +9,7 @@
       font-family: 'ShineCaption';
       src: url('./assets/fonts/しねきゃぷしょん.ttf') format('truetype');
     }
+
     body {
       background-color: #fdfcf7;
       font-family: 'ShineCaption', sans-serif;
@@ -16,13 +17,16 @@
       margin: 0;
       padding: 0;
     }
+
     #titleScreen {
-      padding: 1.0px;
+      padding: 1px;
     }
+
     h1 {
       font-size: 1.9rem;
       color: #cd7d7f;
     }
+
     #startButton {
       font-size: 1.0rem;
       padding: 8px 16px;
@@ -32,6 +36,7 @@
       border: none;
       border-radius: 10px;
     }
+
     #restartButton {
       font-size: 1.0rem;
       padding: 8px 16px;
@@ -41,6 +46,7 @@
       border: none;
       border-radius: 10px;
     }
+
     #gameScreen {
       display: none;
       position: relative;
@@ -51,39 +57,38 @@
       padding: 40px 20px;
       border-radius: 20px;
       max-width: 400px;
+      margin: 0 auto 80px;
       color: #fffaf0;
-      margin-top: 0.1px; 
-      margin-bottom: 80px; 
     }
+
     #kanjiText {
       font-size: 1.6rem;
-      margin: 50px auto 5px;
+      margin-top: 50px;
+      margin-bottom: 5px;
     }
+
     #kanaText {
       font-size: 0.9rem;
       margin: 10px auto 20px;
     }
+
     input[type="text"] {
       font-size: 1.2rem;
       color: white;
       padding: 10px;
       width: 80%;
-      border: none; /* ← ここで枠を削除 */
+      border: none;
       border-radius: 8px;
-      background-color: #cd7d7f; /* 塗りつぶしと同じ色 */
-    }
-    input[type="text"]:focus {
-      outline: none;                /* デフォルトの枠線を消す */
-      border: 1px solid #cd7d7f;    /* 好きな色にする（れいさんピンク） */
-    }
-    #small-timer {
+      background-color: #cd7d7f;
+      opacity: 0;
       position: absolute;
-      top: 60px;
-      left: 12px;
-      font-size: 0.8rem;
-      color: white;
-      font-family: 'ShineCaption', sans-serif;
+      z-index: -1;
     }
+
+    input[type="text"]:focus {
+      outline: none;
+    }
+
     #muteButton {
       position: absolute;
       top: 20px;
@@ -95,6 +100,7 @@
       border: none;
       border-radius: 4px;
     }
+
     #result {
       font-family: 'ShineCaption', sans-serif;
       color: white;
@@ -103,10 +109,29 @@
       margin-bottom: 0.5px;
       line-height: 1.6;
     }
+
     #result .rank {
       font-size: 36px;
       color: white;
       font-weight: bold;
+    }
+
+    /* ✅ シークバー追加部分 */
+    #progress-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background-color: #eee;
+      z-index: 9999;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background-color: #cd7d7f;
+      width: 0%;
+      transition: width 1s linear;
     }
   </style>
 </head>
@@ -126,14 +151,15 @@
   <!-- ゲーム画面 -->
   <div id="gameScreen">
     <button id="muteButton">BGM: ON</button>
-    <div id="small-timer">残り60秒</div>
+    <div id="small-timer" style="display: none;"></div>
     <p id="kanjiText"></p>
     <p id="kanaText"></p>
-    <input id="inputBox" type="text" style="opacity: 0; position: absolute; z-index: -1;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    <input id="inputBox" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
     <div id="result"></div>
     <button id="restartButton" style="display:none;">🧸Replay</button>
   </div>
 
+  <!-- ✅ シークバー要素（空div。main.jsで内容を追加） -->
   <script type="module" src="./main.js"></script>
 </body>
 </html>
