@@ -1,11 +1,11 @@
-// main.js　PC風判定
+// main.js（シークバー設置）
 
 import { problemList } from './problems.js';
 
 let currentIndex = 0;
 let currentProblem = null;
 let currentKana = "";
-let inputIndex = 0;
+let inputBuffer = "";
 let score = 0;
 let miss = 0;
 let timeLeft = 60;
@@ -21,10 +21,10 @@ const gameScreen = document.getElementById("gameScreen");
 const titleScreen = document.getElementById("titleScreen");
 const kanaText = document.getElementById("kanaText");
 const kanjiText = document.getElementById("kanjiText");
-const inputBox = document.getElementById("inputBox");
 const timerDisplay = document.getElementById("small-timer");
 const resultDisplay = document.getElementById("result");
 const muteButton = document.getElementById("muteButton");
+const progressBar = document.getElementById("progress-bar");
 
 let shuffledProblems = [];
 
@@ -42,15 +42,12 @@ function startGame() {
   gameScreen.style.display = "block";
   resultDisplay.innerHTML = "";
   restartButton.style.display = "none";
-  inputBox.style.display = "inline-block";
 
   score = 0;
   miss = 0;
   timeLeft = 60;
   currentIndex = 0;
-  inputIndex = 0;
-  currentKana = "";
-  currentProblem = null;
+  inputBuffer = "";
 
   const rest = problemList.slice(1);
   shuffledProblems = shuffleArray(rest);
@@ -61,13 +58,13 @@ function startGame() {
 
   nextProblem();
   updateTimer();
-  inputBox.value = "";
-  inputBox.focus();
+  updateProgressBar();
 
   clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
     updateTimer();
+    updateProgressBar();
     if (timeLeft <= 0) {
       clearInterval(timer);
       endGame();
@@ -77,6 +74,11 @@ function startGame() {
 
 function updateTimer() {
   timerDisplay.textContent = `残り${timeLeft}秒`;
+}
+
+function updateProgressBar() {
+  const percentage = ((60 - timeLeft) / 60) * 100;
+  progressBar.style.width = `${percentage}%`;
 }
 
 function nextProblem() {
@@ -91,43 +93,42 @@ function nextProblem() {
   }
 
   currentKana = currentProblem.kana;
-  inputIndex = 0;
   kanjiText.textContent = currentProblem.kanji;
-  kanaText.innerHTML = highlightKana(currentKana, inputIndex);
-  inputBox.value = "";
-  inputBox.focus();
+  kanaText.innerHTML = "";
+  inputBuffer = "";
+
+  for (let i = 0; i < currentKana.length; i++) {
+    const span = document.createElement("span");
+    span.textContent = currentKana[i];
+    span.className = "kana-char";
+    kanaText.appendChild(span);
+  }
+
   currentIndex++;
 }
 
-function highlightKana(kana, index) {
-  return kana
-    .split('')
-    .map((char, i) => i < index ? `<span style="color: gray;">${char}</span>` : char)
-    .join('');
-}
-
 function handleInput(e) {
-  const typed = e.target.value.normalize("NFC").trim();
-  const expected = currentKana[inputIndex];
-  const typedChar = typed.slice(-1); // 最後に入力された1文字だけ判定
+  const input = e.data || "";
+  if (!input) return;
 
-  if (typedChar === expected) {
+  inputBuffer += input;
+
+  const expectedChar = currentKana[inputBuffer.length - 1];
+  const typedChar = input;
+  const span = kanaText.children[inputBuffer.length - 1];
+
+  if (typedChar === expectedChar) {
     score++;
-    inputIndex++;
-    kanaText.innerHTML = highlightKana(currentKana, inputIndex);
-    if (inputIndex >= currentKana.length) {
-      nextProblem();
+    if (span) span.style.color = "gray";
+    if (inputBuffer === currentKana) {
+      setTimeout(nextProblem, 100);
     }
-  } else if (typed.length > 0) {
+  } else {
     miss++;
   }
-
-  // 入力欄は常に空にして1文字ずつ打ち直させる
-  inputBox.value = "";
 }
 
 function endGame() {
-  inputBox.style.display = "none";
   kanjiText.textContent = "";
   kanaText.textContent = "";
 
@@ -143,7 +144,7 @@ function endGame() {
     平均タイプ数: ${speed} 回/秒`;
 
   restartButton.style.display = "inline-block";
-  inputBox.blur();
+  progressBar.style.width = "0%";
 }
 
 function updateMuteButton() {
@@ -157,14 +158,13 @@ function toggleMute() {
 }
 
 startButton.addEventListener("click", () => {
-  document.addEventListener("click", () => inputBox.focus());
+  document.addEventListener("keydown", handleInput);
   startGame();
 });
 
 restartButton.addEventListener("click", () => {
-  document.addEventListener("click", () => inputBox.focus());
+  document.addEventListener("keydown", handleInput);
   startGame();
 });
 
 muteButton.addEventListener("click", toggleMute);
-inputBox.addEventListener("input", handleInput);
