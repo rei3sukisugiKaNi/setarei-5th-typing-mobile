@@ -1,7 +1,6 @@
 // problems.js
 
 export const problemList = [
-// 濁音・半濁音
   {
     kanji: "五周年おめでとうございます",
     kana:  "ごしゅうねんおめでとうございます"
@@ -53,7 +52,7 @@ export const problemList = [
     kana:  "としうえかのじょしりーず"
   },
   {
-    kanji: "消しちゃおっかツイッターのフォロー",
+    kanji: "消しちゃおっか<br>ツイッターのフォロー",
     kana:  "けしちゃおっかついったーのふぉろー"
   },
   {
@@ -97,7 +96,7 @@ export const problemList = [
     kana:  "といき、りっぷおんちゅうい"
   },
   {
-    kanji: "クズです音注意",
+    kanji: "クズです注意",
     kana:  "くずですちゅうい"
   },
   {
@@ -117,8 +116,8 @@ export const problemList = [
     kana:  "わたしがきめるの"
   },
   {
-    kanji: "ヒビカセは中毒性あり",
-    kana:  "ひびかせはちゅうどくせいあり"
+    kanji: "ヒビカセ",
+    kana:  "ひびかせ"
   },
   {
     kanji: "気持ちいい事好きですもんね",
@@ -165,7 +164,7 @@ export const problemList = [
     kana:  "わたしのこえすきでしょ"
   },
   {
-    kanji: "一人暮らしなのに声我慢するんですか",
+    kanji: "一人暮しなのに声我慢するんですか",
     kana:  "ひとりぐらしなのにこえがまんするんですか"
   },
   {
@@ -197,8 +196,12 @@ export const problemList = [
     kana:  "うわきした？"
   },
   {
-    kanji: "濡れてるのがわかっちゃうの嫌なんだ",
-    kana:  "ぬれてるのがわかっちゃうのいやなんだ"
+    kanji: "濡れてるのわかっちゃうの嫌なんだ",
+    kana:  "ぬれてるのわかっちゃうのいやなんだ"
+  },
+  {
+    kanji: "指舐め強要",
+    kana:  "ゆびなめきょうよう"
   },
   {
     kanji: "舐めるの上手",
@@ -209,8 +212,8 @@ export const problemList = [
     kana:  "あーそれやばい"
   },
   {
-    kanji: "すみません。キャンディキスゲーム会場はどちらですか",
-    kana:  "すみません。きゃんでぃきすげーむかいじょうはどちらですか"
+    kanji: "すみません。キャンディキス<br>ゲーム会場はどちらですか？",
+    kana:  "すみません。きゃんでぃきすげーむかいじょうはどちらですか？"
   },
   {
     kanji: "スペアリブ",
@@ -246,8 +249,16 @@ export const problemList = [
     kana:  "どらさんこらぼ"
   },
   {
+    kanji: "dan.さんコラボ",
+    kana:  "だんさんこらぼ"
+  },
+  {
     kanji: "通話企画",
     kana:  "つうわきかく"
+  },
+  {
+    kanji: "連絡は電話がいい",
+    kana:  "れんらくはでんわがいい"
   },
   {
     kanji: "耳舐め",
@@ -376,6 +387,10 @@ export const problemList = [
   {
     kanji: "北風小僧の寒太郎",
     kana:  "きたかぜこぞうのさむたろう"
+  },
+  {
+    kanji: "緑黄色社会",
+    kana:  "りょくおうしょくやさい"
   },
   {
     kanji: "順番に性癖コメントして",
