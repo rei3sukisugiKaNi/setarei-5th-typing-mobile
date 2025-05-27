@@ -239,6 +239,10 @@ export const problemList = [
     kanji: "シチュボは気が向くまで出ません",
     kana:  "しちゅぼはきがむくまででません"
   },
+  {
+    kanji: "れいちゃんアカペラチャレンジ一年生",
+    kana:  "れいちゃんあかぺらちゃれんじいちねんせい"
+  },
 // キャス
   {
     kanji: "Youtubelive挫折",
