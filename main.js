@@ -1,4 +1,9 @@
-// main.js 完成版
+// main.js(PC風判定)完成版 + シークバー表示調整（★完成）
+// ==========================
+// 🎉 完成バージョン！
+// 2025/05/26 最終調整済み
+// これ以上の上書き禁止！
+// ==========================
 
 import { problemList } from './problems.js';
 
@@ -28,6 +33,7 @@ const muteButton = document.getElementById("muteButton");
 
 let shuffledProblems = [];
 
+// ✅ シークバー用要素を生成（初期は非表示）
 const progressContainer = document.createElement("div");
 progressContainer.id = "progress-container";
 progressContainer.style.cssText = `
@@ -68,7 +74,7 @@ function startGame() {
   resultDisplay.innerHTML = "";
   restartButton.style.display = "none";
   inputBox.style.display = "inline-block";
-  progressContainer.style.display = "block"; 
+  progressContainer.style.display = "block"; // ✅ 表示開始
 
   score = 0;
   miss = 0;
@@ -90,7 +96,7 @@ function startGame() {
   inputBox.value = "";
   inputBox.focus();
 
-  progressBar.style.width = "0%"; 
+  progressBar.style.width = "0%"; // ✅ 初期化
   let elapsed = 0;
   clearInterval(timer);
   timer = setInterval(() => {
@@ -122,7 +128,18 @@ function nextProblem() {
 
   currentKana = currentProblem.kana;
   inputIndex = 0;
-  kanjiText.textContent = currentProblem.kanji;
+
+  // ✅ フォントサイズ調整ロジック
+  const len = currentProblem.kanji.replace(/<br\s*\/?>/g, "").length;
+  let fontSize = "1.6rem";
+  if (len <= 13) fontSize = "1.6rem";
+  else if (len <= 15) fontSize = "1.4rem";
+  else if (len <= 16) fontSize = "1.3rem";
+  else fontSize = "1.6rem"; // 折り返し許容
+
+  kanjiText.innerHTML = currentProblem.kanji;
+  kanjiText.style.fontSize = fontSize;
+
   kanaText.innerHTML = highlightKana(currentKana, inputIndex);
   inputBox.value = "";
   inputBox.focus();
@@ -158,7 +175,7 @@ function endGame() {
   inputBox.style.display = "none";
   kanjiText.textContent = "";
   kanaText.textContent = "";
-  progressBar.style.width = "100%"; 
+  progressBar.style.width = "100%"; // ✅ 最後まで伸ばす
 
   const speed = (score / 60).toFixed(2);
   let rank = "C";
