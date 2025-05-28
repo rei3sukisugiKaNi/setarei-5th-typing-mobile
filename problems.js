@@ -45,7 +45,14 @@ export const problemList = [
     kanji: "時差め、、、",
     kana:  "じさめ、、、"
   },
-    
+  {
+    kanji: "English OK",
+    kana:  "いんぐりっしゅおーけー"
+  },
+  {
+    kanji: "TikTokもあります",
+    kana:  "てぃっくとっくもあります"
+  },
 // シチュボ・台詞
   {
     kanji: "年上彼女シリーズ",
@@ -240,8 +247,8 @@ export const problemList = [
     kana:  "しちゅぼはきがむくまででません"
   },
   {
-    kanji: "れいちゃんアカペラチャレンジ一年生",
-    kana:  "れいちゃんあかぺらちゃれんじいちねんせい"
+    kanji: "アカペラチャレンジ一年生",
+    kana:  "あかぺらちゃれんじいちねんせい"
   },
 // キャス
   {
