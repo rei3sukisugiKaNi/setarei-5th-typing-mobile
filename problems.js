@@ -79,7 +79,7 @@ export const problemList = [
     kana:  "としうえかのじょしりーず"
   },
   {
-    kanji: "消しちゃおっかtwitterのフォロー",
+    kanji: "消しちゃおっかtwitter<br>のフォロー",
     kana:  "けしちゃおっかついったーのふぉろー"
   },
   {
