@@ -1,430 +1,222 @@
-// problems.js
+// main.js(PC風判定)完成版 + シークバー表示調整（★完成）
+// ==========================
+// 🎉 完成バージョン！
+// 2025/05/26 最終調整済み　改16文字縮小表示設定
+// これ以上の上書き禁止！
+// ==========================
 
-export const problemList = [
-  {
-    kanji: "五周年おめでとうございます",
-    kana:  "ごしゅうねんおめでとうございます"
-  },
-  {
-    kanji: "れいさん大好き",
-    kana:  "れいさんだいすき"
-  },
-  {
-    kanji: "れいさん結婚しよ！",
-    kana:  "れいさんけっこんしよ！"
-  },
-  {
-    kanji: "好きすぎてしんどい",
-    kana:  "すきすぎてしんどい"
-  },
-  {
-    kanji: "過激派のみなさん落ち着いて",
-    kana:  "かげきはのみなさんおちついて"
-  },
-  {
-    kanji: "お気に入り騒動",
-    kana:  "おきにいりそうどう"
-  },
-  {
-    kanji: "質問箱浄化",
-    kana:  "しつもんばこじょうか"
-  },
-  {
-    kanji: "都合のいい関係",
-    kana:  "つごうのいいかんけい"
-  },
-  {
-    kanji: "下心旅行",
-    kana:  "したごころりょこう"
-  },
-  {
-    kanji: "欲求不満",
-    kana:  "よっきゅうふまん"
-  },
-  {
-    kanji: "んー",
-    kana:  "んー"
-  },
-  {
-    kanji: "時差め、、、",
-    kana:  "じさめ、、、"
-  },
-  {
-    kanji: "ベッドにそっと置かれるおもちゃ",
-    kana:  "べっどにそっとおかれるおもちゃ"
-  },
-  {
-    kanji: "泡風呂マスター",
-    kana:  "あわぶろますたー"
-  },
-  {
-    kanji: "English OK",
-    kana:  "いんぐりっしゅおーけー"
-  },
-  {
-    kanji: "TikTokもあります",
-    kana:  "てぃっくとっくもあります"
-  },
-  {
-    kanji: "アカペラチャレンジ一年生",
-    kana:  "あかぺらちゃれんじいちねんせい"
-  },
-// シチュボ・台詞
-  {
-    kanji: "年上彼女シリーズ",
-    kana:  "としうえかのじょしりーず"
-  },
-  {
-    kanji: "消しちゃおっかtwitter<br>のフォロー",
-    kana:  "けしちゃおっかついったーのふぉろー"
-  },
-  {
-    kanji: "一人でしたりするんですか",
-    kana:  "ひとりでしたりするんですか"
-  },
-  {
-    kanji: "声聞かせて",
-    kana:  "こえきかせて"
-  },
-  {
-    kanji: "田中さんのこと嘘つきって呼びます",
-    kana:  "たなかさんのことうそつきってよびます"
-  },
-  {
-    kanji: "私にとって無害",
-    kana:  "わたしにとってむがい"
-  },
-  {
-    kanji: "関西生まれ関西育ち",
-    kana:  "かんさいうまれかんさいそだち"
-  },
-  {
-    kanji: "寝落ちラジオ",
-    kana:  "ねおちらじお"
-  },
-  {
-    kanji: "吐息、リップ音注意",
-    kana:  "といき、りっぷおんちゅうい"
-  },
-  {
-    kanji: "先輩実はドMでしょ",
-    kana:  "せんぱいじつはどえむでしょ"
-  },
-  {
-    kanji: "ちゃんと舌出して",
-    kana:  "ちゃんとしただして"
-  },
-  {
-    kanji: "泣き顔性癖",
-    kana:  "なきがおせいへき"
-  },
-  {
-    kanji: "私が決めるの",
-    kana:  "わたしがきめるの"
-  },
-  {
-    kanji: "Summertime",
-    kana:  "さまーたいむ"
-  },
-  {
-    kanji: "ヒビカセ",
-    kana:  "ひびかせ"
-  },
-  {
-    kanji: "気持ちいい事好きですもんね",
-    kana:  "きもちいいことすきですもんね"
-  },
-  {
-    kanji: "同僚",
-    kana:  "どうりょう"
-  },
-  {
-    kanji: "先輩がダメなら後輩もアリかも",
-    kana:  "せんぱいがだめならこうはいもありかも"
-  },
-  {
-    kanji: "学生シチュ",
-    kana:  "がくせいしちゅ"
-  },
-  {
-    kanji: "napori",
-    kana:  "なぽり"
-  },
-  {
-    kanji: "その人のこと好きなの？",
-    kana:  "そのひとのことすきなの？"
-  },
-  {
-    kanji: "縛っててよかった",
-    kana:  "しばっててよかった"
-  },
-  {
-    kanji: "お風呂一緒にはいろっか",
-    kana:  "おふろいっしょにはいろっか"
-  },
-  {
-    kanji: "いっぱいぎゅーしてちゅー",
-    kana:  "いっぱいぎゅーしてちゅー"
-  },
-  {
-    kanji: "なに想像しました",
-    kana:  "なにそうぞうしました"
-  },
-  {
-    kanji: "世田れいと電話",
-    kana:  "せたれいとでんわ"
-  },
-  {
-    kanji: "一人でするように指示",
-    kana:  "ひとりでするようにしじ"
-  },
-  {
-    kanji: "私の声好きでしょ",
-    kana:  "わたしのこえすきでしょ"
-  },
-  {
-    kanji: "一人暮しなのに声我慢するんですか",
-    kana:  "ひとりぐらしなのにこえがまんするんですか"
-  },
-  {
-    kanji: "小夜子",
-    kana:  "さよこ"
-  },
-  {
-    kanji: "塩対応な家庭教師の先生",
-    kana:  "しおたいおうなかていきょうしのせんせい"
-  },
-  {
-    kanji: "自分にべた惚れな女の子",
-    kana:  "じぶんにべたぼれなおんなのこ"
-  },
-  {
-    kanji: "関西弁彼女",
-    kana:  "かんさいべんかのじょ"
-  },
-  {
-    kanji: "寝たふりバレてますよ",
-    kana:  "ねたふりばれてますよ"
-  },
-  {
-    kanji: "きもちいと何も考えられないの？",
-    kana:  "きもちいとなにもかんがえられないの？"
-  },
-  {
-    kanji: "スペアリブ",
-    kana:  "すぺありぶ"
-  },
-  {
-    kanji: "やだ",
-    kana:  "やだ"
-  },
-  {
-    kanji: "私のものだって思わせて",
-    kana:  "わたしのものだっておもわせて"
-  },
-  {
-    kanji: "キャンディキスゲーム会場は<br>どちらですか？",
-    kana:  "きゃんでぃきすげーむかいじょうはどちらですか？"
-  },
-  {
-    kanji: "浮気した？",
-    kana:  "うわきした？"
-  },
-  {
-    kanji: "濡れてるのわかっちゃうの嫌なんだ",
-    kana:  "ぬれてるのわかっちゃうのいやなんだ"
-  },
-  {
-    kanji: "指舐め強要",
-    kana:  "ゆびなめきょうよう"
-  },
-  {
-    kanji: "舐めるの上手",
-    kana:  "なめるのじょうず"
-  },
-  {
-    kanji: "あーそれやばい",
-    kana:  "あーそれやばい"
-  },
-  {
-    kanji: "世田れいショートボイス",
-    kana:  "せたれいしょーとぼいす"
-  },
-  {
-    kanji: "れいちゃん情報",
-    kana:  "れいちゃんじょうほう"
-  },
-  {
-    kanji: "れいのためにどれくらい頑張れそう",
-    kana:  "れいのためにどれくらいがんばれそう"
-  },
-  {
-    kanji: "もっと好きになって",
-    kana:  "もっとすきになって"
-  },
-  {
-    kanji: "シチュボは気が向くまで出ません",
-    kana:  "しちゅぼはきがむくまででません"
-  },
-      {
-    kanji: "クズです注意",
-    kana:  "くずですちゅうい"
-  },
-  {
-    kanji: "事後注意",
-    kana:  "じごちゅうい"
-  },
-  {
-    kanji: "咀嚼音注意",
-    kana:  "そしゃくおんちゅうい"
-  },
-// キャス
-  {
-    kanji: "Youtubelive挫折",
-    kana:  "ゆーちゅーぶらいぶざせつ"
-  },
-  {
-    kanji: "どらさんコラボ",
-    kana:  "どらさんこらぼ"
-  },
-  {
-    kanji: "dan.さんコラボ",
-    kana:  "だんさんこらぼ"
-  },
-  {
-    kanji: "通話企画",
-    kana:  "つうわきかく"
-  },
-  {
-    kanji: "連絡は電話がいい",
-    kana:  "れんらくはでんわがいい"
-  },
-  {
-    kanji: "耳舐め",
-    kana:  "みみなめ"
-  },
-  {
-    kanji: "巣蜜",
-    kana:  "すみつ"
-  },
-    {
-    kanji: "ハニーゼリー",
-    kana:  "はにーぜりー"
-  },
-    {
-    kanji: "大きいゴーフル",
-    kana:  "おおきいごーふる"
-  },
-  {
-    kanji: "リップ音同時視聴",
-    kana:  "りっぷおんどうじしちょう"
-  },
-  {
-    kanji: "充電問題",
-    kana:  "じゅうでんもんだい"
-  },
-  {
-    kanji: "ねこひゃっぴき",
-    kana:  "ねこひゃっぴき"
-  },
-  {
-    kanji: "こんばんは世田れいです",
-    kana:  "こんばんはせたれいです"
-  },
-  {
-    kanji: "なんの話する",
-    kana:  "なんのはなしする"
-  },
-  {
-    kanji: "いちゃいちゃ",
-    kana:  "いちゃいちゃ"
-  },
-  {
-    kanji: "おもちちゃん",
-    kana:  "おもちちゃん"
-  },
-  {
-    kanji: "テディ先輩",
-    kana:  "てでぃせんぱい"
-  },
-  {
-    kanji: "マイメロ配信者",
-    kana:  "まいめろはいしんしゃ"
-  },
-  {
-    kanji: "れいと付き合ったら何したい",
-    kana:  "れいとつきあったらなにしたい"
-  },
-  {
-    kanji: "一回嫌がって欲しい",
-    kana:  "いっかいいやがってほしい"
-  },
-  {
-    kanji: "ハーレムつくりにきてる",
-    kana:  "はーれむつくりにきてる"
-  },
-  {
-    kanji: "お揃いパジャマ",
-    kana:  "おそろいぱじゃま"
-  },
-  {
-    kanji: "お布施ありがと昇格です",
-    kana:  "おふせありがとしょうかくです"
-  },
-  {
-    kanji: "～～毎",
-    kana:  "なんとかまい"
-  },
-  {
-    kanji: "何卒",
-    kana:  "なにそつ"
-  },
-  {
-    kanji: "またしても身長を偽る世田れい",
-    kana:  "またしてもしんちょうをいつわるせたれい"
-  },
-  {
-    kanji: "メンタルぽよ励み系フォルダ",
-    kana:  "めんたるぽよはげみけいふぉるだ"
-  },
-  {
-    kanji: "吹きガラスで怒られる",
-    kana:  "ふきがらすでおこられる"
-  },
-  {
-    kanji: "キョロキョロ蛙化",
-    kana:  "きょろきょろかえるか"
-  },
-  {
-    kanji: "ベッドメイクの天才",
-    kana:  "べっどめいくのてんさい"
-  },
-  {
-    kanji: "言葉責め",
-    kana:  "ことばぜめ"
-  },
-  {
-    kanji: "メイドコス洋服抜き",
-    kana:  "めいどこすようふくぬき"
-  },
-  {
-    kanji: "愛してるゲーム無敵",
-    kana:  "あいしてるげーむむてき"
-  },
-  {
-    kanji: "バリバリの関西弁",
-    kana:  "ばりばりのかんさいべん"
-  },
-  {
-    kanji: "北風小僧の寒太郎",
-    kana:  "きたかぜこぞうのさむたろう"
-  },
-  {
-    kanji: "緑黄色社会",
-    kana:  "りょくおうしょくやさい"
-  },
-  {
-    kanji: "順番に性癖コメントして",
-    kana:  "じゅんばんにせいへきこめんとして"
+import { problemList } from './problems.js';
+
+let currentIndex = 0;
+let currentProblem = null;
+let currentKana = "";
+let inputIndex = 0;
+let score = 0;
+let miss = 0;
+let timeLeft = 60;
+let timer;
+let bgmPlaying = true;
+let bgm = new Audio("bgm.mp3");
+bgm.loop = true;
+bgm.volume = 0.3;
+
+const startButton = document.getElementById("startButton");
+const restartButton = document.getElementById("restartButton");
+const gameScreen = document.getElementById("gameScreen");
+const titleScreen = document.getElementById("titleScreen");
+const kanaText = document.getElementById("kanaText");
+const kanjiText = document.getElementById("kanjiText");
+const inputBox = document.getElementById("inputBox");
+const timerDisplay = document.getElementById("small-timer");
+const resultDisplay = document.getElementById("result");
+const muteButton = document.getElementById("muteButton");
+
+let shuffledProblems = [];
+
+// ✅ シークバー用要素を生成（初期は非表示）
+const progressContainer = document.createElement("div");
+progressContainer.id = "progress-container";
+progressContainer.style.cssText = `
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  width: 90%;
+  height: 6px;
+  background-color: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+  display: none;
+  z-index: 1;
+`;
+const progressBar = document.createElement("div");
+progressBar.id = "progress-bar";
+progressBar.style.cssText = `
+  width: 0%;
+  height: 100%;
+  background-color: red;
+  transition: width 1s linear;
+`;
+progressContainer.appendChild(progressBar);
+document.getElementById("gameScreen").appendChild(progressContainer);
+
+function shuffleArray(array) {
+  const copied = [...array];
+  for (let i = copied.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copied[i], copied[j]] = [copied[j], copied[i]];
   }
-];
+  return copied;
+}
+
+function adjustedLength(text) {
+  return text.split('').reduce((sum, char) => {
+    return sum + (/[ゃゅょぁぃぅぇぉっ]/.test(char) ? 0.5 : 1);
+  }, 0);
+}
+
+function startGame() {
+  titleScreen.style.display = "none";
+  gameScreen.style.display = "block";
+  resultDisplay.innerHTML = "";
+  restartButton.style.display = "none";
+  inputBox.style.display = "inline-block";
+  progressContainer.style.display = "block"; // ✅ 表示開始
+
+  score = 0;
+  miss = 0;
+  timeLeft = 60;
+  currentIndex = 0;
+  inputIndex = 0;
+  currentKana = "";
+  currentProblem = null;
+
+  const rest = problemList.slice(1);
+  shuffledProblems = shuffleArray(rest);
+
+  bgm.play();
+  bgm.muted = !bgmPlaying;
+  updateMuteButton();
+
+  nextProblem();
+  updateTimer();
+  inputBox.value = "";
+  inputBox.focus();
+
+  progressBar.style.width = "0%"; // ✅ 初期化
+  let elapsed = 0;
+  clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    elapsed++;
+    updateTimer();
+    progressBar.style.width = `${(elapsed / 60) * 100}%`;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      endGame();
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  timerDisplay.textContent = `残り${timeLeft}秒`;
+}
+
+function nextProblem() {
+  if (currentIndex === 0) {
+    currentProblem = problemList[0];
+  } else {
+    if (currentIndex - 1 >= shuffledProblems.length) {
+      endGame();
+      return;
+    }
+    currentProblem = shuffledProblems[currentIndex - 1];
+  }
+
+  currentKana = currentProblem.kana;
+  inputIndex = 0;
+  kanjiText.textContent = currentProblem.kanji;
+  kanaText.innerHTML = highlightKana(currentKana, inputIndex);
+  inputBox.value = "";
+  inputBox.focus();
+  currentIndex++;
+
+  const len = adjustedLength(currentProblem.kanji);
+  if (len <= 13) {
+    kanjiText.style.fontSize = "1.6rem";
+  } else if (len <= 15) {
+    kanjiText.style.fontSize = "1.4rem";
+  } else if (len <= 16) {
+    kanjiText.style.fontSize = "1.3rem";
+  } else {
+    kanjiText.style.fontSize = "1.6rem";
+  }
+}
+
+function highlightKana(kana, index) {
+  return kana
+    .split('')
+    .map((char, i) => i < index ? `<span style="color: gray;">${char}</span>` : char)
+    .join('');
+}
+
+function handleInput(e) {
+  const typed = e.target.value.normalize("NFC").trim();
+  const expected = currentKana[inputIndex];
+  const typedChar = typed.slice(-1);
+
+  if (typedChar === expected) {
+    score++;
+    inputIndex++;
+    kanaText.innerHTML = highlightKana(currentKana, inputIndex);
+    if (inputIndex >= currentKana.length) {
+      nextProblem();
+    }
+  } else if (typed.length > 0) {
+    miss++;
+  }
+  inputBox.value = "";
+}
+
+function endGame() {
+  inputBox.style.display = "none";
+  kanjiText.textContent = "";
+  kanaText.textContent = "";
+  progressBar.style.width = "100%"; // ✅ 最後まで伸ばす
+
+  const speed = (score / 60).toFixed(2);
+  let rank = "C";
+  if (score >= 220) rank = "S";
+  else if (score >= 180) rank = "A";
+  else if (score >= 150) rank = "B";
+
+  resultDisplay.innerHTML = `おつかれさまでした<br><span class="rank">ランク: ${rank}</span><br>
+    正しく打ったキー: ${score}<br>
+    ミスタイプ: ${miss}<br>
+    平均タイプ数: ${speed} 回/秒`;
+
+  restartButton.style.display = "inline-block";
+  inputBox.blur();
+}
+
+function updateMuteButton() {
+  muteButton.textContent = bgmPlaying ? "🔇 BGM: OFF" : "🔊 BGM: ON";
+}
+
+function toggleMute() {
+  bgmPlaying = !bgmPlaying;
+  bgm.muted = !bgmPlaying;
+  updateMuteButton();
+}
+
+startButton.addEventListener("click", () => {
+  document.addEventListener("click", () => inputBox.focus());
+  startGame();
+});
+
+restartButton.addEventListener("click", () => {
+  document.addEventListener("click", () => inputBox.focus());
+  startGame();
+});
+
+muteButton.addEventListener("click", toggleMute);
+inputBox.addEventListener("input", handleInput);
