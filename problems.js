@@ -46,6 +46,10 @@ export const problemList = [
     kana:  "んー"
   },
   {
+    kanji: "したい",
+    kana:  "したい"
+  },
+  {
     kanji: "時差め、、、",
     kana:  "じさめ、、、"
   },
