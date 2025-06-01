@@ -70,10 +70,6 @@ export const problemList = [
     kana:  "いぎりすいじゅう"
   },
   {
-    kanji: "TikTokもあります",
-    kana:  "てぃっくとっくもあります"
-  },
-  {
     kanji: "アカペラチャレンジ一年生",
     kana:  "あかぺらちゃれんじいちねんせい"
   },
