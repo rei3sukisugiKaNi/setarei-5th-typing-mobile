@@ -1,5 +1,3 @@
-// main.js完成版
-
 import { problemList } from './problems.js';
 
 let currentIndex = 0;
@@ -61,7 +59,6 @@ function shuffleArray(array) {
   }
   return copied;
 }
-
 function adjustedLength(text) {
   return text.split('').reduce((sum, char) => {
     return sum + (/[ゃゅょぁぃぅぇぉっ]/.test(char) ? 0.5 : 1);
@@ -110,11 +107,9 @@ function startGame() {
     }
   }, 1000);
 }
-
 function updateTimer() {
   timerDisplay.textContent = `残り${timeLeft}秒`;
 }
-
 function nextProblem() {
   if (currentIndex === 0) {
     currentProblem = problemList[0];
@@ -145,14 +140,12 @@ function nextProblem() {
     kanjiText.style.fontSize = "1.6rem";
   }
 }
-
 function highlightKana(kana, index) {
   return kana
     .split('')
     .map((char, i) => i < index ? `<span style="color: gray;">${char}</span>` : char)
     .join('');
 }
-
 function handleInput(e) {
   const typed = e.target.value.normalize("NFC").trim();
   const expected = currentKana[inputIndex];
@@ -179,11 +172,11 @@ function endGame() {
 
   const speed = (score / 60).toFixed(2);
   let rank = "C";
-  if (score >= 220) rank = "S";
+  if (score >= 210) rank = "S";
   else if (score >= 180) rank = "A";
   else if (score >= 150) rank = "B";
 
-  resultDisplay.innerHTML = `おつかれさまでした<br><span class="rank">ランク: ${rank}</span><br>
+  resultDisplay.innerHTML = `<span class="rank">ランク: ${rank}</span><br>
     正しく打ったキー: ${score}<br>
     ミスタイプ: ${miss}<br>
     平均タイプ数: ${speed} 回/秒`;
@@ -191,26 +184,21 @@ function endGame() {
   restartButton.style.display = "inline-block";
   inputBox.blur();
 }
-
 function updateMuteButton() {
   muteButton.textContent = bgmPlaying ? "🔇 BGM: OFF" : "🔊 BGM: ON";
 }
-
 function toggleMute() {
   bgmPlaying = !bgmPlaying;
   bgm.muted = !bgmPlaying;
   updateMuteButton();
 }
-
 startButton.addEventListener("click", () => {
   document.addEventListener("click", () => inputBox.focus());
   startGame();
 });
-
 restartButton.addEventListener("click", () => {
   document.addEventListener("click", () => inputBox.focus());
   startGame();
 });
-
 muteButton.addEventListener("click", toggleMute);
 inputBox.addEventListener("input", handleInput);
