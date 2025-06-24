@@ -11,7 +11,7 @@ let timer;
 let bgmPlaying = true;
 let bgm = new Audio("bgm.mp3");
 bgm.loop = true;
-bgm.volume = 0.1;
+bgm.volume = 0.01;
 
 const startButton = document.getElementById("startButton");
 const restartButton = document.getElementById("restartButton");
